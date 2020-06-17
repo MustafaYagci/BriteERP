@@ -55,27 +55,45 @@ public class InvoiceStepDefs {
                 }
             }
         }
-        System.out.println(actual);
-        System.out.println(expected);
     }
 
     @Then("Veify that {int} small buttons are displayed down of the search box")
-    public void veify_that_small_buttons_are_displayed_down_of_the_search_box(Integer int1) {
-
+    public void veify_that_small_buttons_are_displayed_down_of_the_search_box(int expected) {
+          int actual= IP.small5Button.size();
+        Assert.assertEquals("The number of buttons are not expected",expected,actual);
     }
 
     @Then("Verify that page header is {string}")
-    public void verify_that_page_header_is(String string) {
-
+    public void verify_that_page_header_is(String expected) {
+        String actual = Driver.get().getTitle();
+        Assert.assertEquals("The page title is not same",expected,actual);
     }
 
     @When("Verify that radio buttons are clickable")
-    public void verify_that_radio_buttons_are_clickable() {
+    public void verify_that_radio_buttons_are_clickable() throws Exception {
+      WebElement checkBox= IP.tableCheckBox(8);
+      checkBox.click();
+      //Thread.sleep(1000);
+      WebDriverWait wait = new WebDriverWait(Driver.get(),20);
+
+      wait.until(ExpectedConditions.visibilityOf(Driver.get().findElement(By.xpath("(//button[@aria-expanded='false'])[1]"))));
+      Assert.assertTrue(Driver.get().findElement(By.xpath("(//button[@aria-expanded='false'])[1]")).isDisplayed());
 
     }
 
     @When("Verify that {string} and {string} buttons are displayed")
     public void verify_that_and_buttons_are_displayed(String string, String string2) {
+        ArrayList<String> actual= new ArrayList<>();
+        for (WebElement each: IP.CreateImport){
+            actual.add(each.getText());
+        }
+
+        if(actual.contains(string) || actual.contains(string2)){
+            Assert.assertTrue(true);
+        }
+        else {
+            Assert.assertTrue(false);
+        }
 
     }
 

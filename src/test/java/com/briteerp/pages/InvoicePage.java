@@ -1,6 +1,7 @@
 package com.briteerp.pages;
 
 import com.briteerp.utilities.Driver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -21,6 +22,15 @@ public class InvoicePage extends LoginPage {
     @FindBy(xpath = "//thead//th")
     public List<WebElement> theads;
 
+    @FindBy(xpath = "//div[@class='btn-group btn-group-sm o_cp_switch_buttons']/button")
+    public List<WebElement> small5Button;
+
+   public WebElement tableCheckBox(int rowNum){
+       return Driver.get().findElement(By.xpath("//table/tbody/tr["+rowNum+"]/td[1]"));
+   }
+
+   @FindBy(xpath = "//div[@class='o_list_buttons']//button")
+   public List<WebElement> CreateImport;
 
 
 
