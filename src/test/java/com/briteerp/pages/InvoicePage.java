@@ -32,10 +32,14 @@ public class InvoicePage extends LoginPage {
    @FindBy(xpath = "//div[@class='o_list_buttons']//button")
    public List<WebElement> CreateImport;
 
+   @FindBy(xpath = "//div[@class='btn-group btn-group-sm']/button")
+    public List<WebElement> CalendarDWM;
 
+   @FindBy(xpath = "//div[@class='oe_secondary_menu'][9]/ul/li/a")
+   public List<WebElement> petitModules;
 
-
-
+   @FindBy(xpath = "//li/ul[@class='oe_secondary_submenu nav nav-pills nav-stacked']/li")
+    public List<WebElement>decendantsDocuments;
 
 
 }

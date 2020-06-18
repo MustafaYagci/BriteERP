@@ -98,22 +98,40 @@ public class InvoiceStepDefs {
     }
 
     @Then("Verify that user should able to click {string}")
-    public void verify_that_user_should_able_to_click(String string) {
-
+    public void verify_that_user_should_able_to_click(String string) throws Exception{
+      IP.small5Button.get(2).click();
+      Thread.sleep(1500);
+      String url=Driver.get().getCurrentUrl();
+        System.out.println(url);
+        System.out.println(string);
+      Assert.assertTrue(url.contains(string));
     }
 
-    @Given("Verify that user should able to see {string} {string} {string} buttons")
-    public void verify_that_user_should_able_to_see_buttons(String string, String string2, String string3) {
-
+    @Given("Verify that user should able to see following buttons")
+    public void verify_that_user_should_able_to_see_following_buttons(List<String> expected) {
+      List<String> actual=new ArrayList<>();
+      for (WebElement each: IP.CalendarDWM){
+          actual.add(each.getText());
+      }
+      Assert.assertEquals("The buttons names are not expected",expected,actual);
     }
 
-    @Given("Verify that {string} and {string} are displayed under {string}")
-    public void verify_that_and_are_displayed_under(String string, String string2, String string3) {
-
+    @Given("Verify that followings are displayed under Sales")
+    public void verify_that_followings_are_displayed_under_Sales(List<String> expected) {
+      List<String> actual = new ArrayList<>();
+        for (WebElement each: IP.petitModules){
+            actual.add(each.getText());
+        }
+        Assert.assertEquals("The petit Modules are missing",expected,actual);
     }
 
     @Then("Verify that {int} link displayed under Documents")
-    public void verify_that_link_displayed_under_Documents(Integer int1) {
+    public void verify_that_link_displayed_under_Documents(int expected) throws Exception {
+         IP.petitModules.get(0).click();
+         IP.petitModules.get(0).click();
+         Thread.sleep(1500);
+         int actual=IP.decendantsDocuments.size();
+         Assert.assertEquals(expected,actual);
 
     }
 
